@@ -13,7 +13,7 @@ class Course(BaseModel):
     description: str
     domain: List[str]
     chapters: List[Chapter]
-    rating: Optional[int] = 0
+    rating: Optional[float] = 0
 
 class CourseListResponse(BaseModel):
     courses: List[Course]
@@ -25,4 +25,4 @@ class ChapterInfoResponse(BaseModel):
     chapter: Chapter
 
 class RatingRequest(BaseModel):
-    rating: int
+    rating: float

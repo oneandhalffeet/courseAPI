@@ -3,8 +3,6 @@ from fastapi import FastAPI, Query, HTTPException, Body
 from pymongo import MongoClient
 from model import Course, Chapter, CourseListResponse, CourseOverviewResponse, ChapterInfoResponse, RatingRequest
 from typing import Optional
-from contextlib import asynccontextmanager
-import aiofiles
 
 
 
@@ -78,17 +76,15 @@ def rate_chapter(course_name: str, chapter_name: str, rating: RatingRequest):
         raise HTTPException(status_code=404, detail="Chapter not found")
         
     # Calculate the new average rating for the course
-    total_rating = 0
+    curr_rating = course['rating']
     chapter_count = len(course['chapters'])
     
-    for chapter in course['chapters']:
-        total_rating += chapter['rating']
     
-    new_average_rating = total_rating / chapter_count if chapter_count > 0 else 0
+    new_average_rating = curr_rating + rating.rating/chapter_count if chapter_count > 0 else 1
 
     # Update course rating
     courses_collection.update_one(
         {"name": course_name},
         {"$set": {"rating": new_average_rating}}
     )
-    return {"message": "Rating submitted", "new_rating": course['rating']}
+    return {"message": "Rating submitted", "new_rating": rating.rating}
