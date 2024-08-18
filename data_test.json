@@ -1,0 +1,24 @@
+[
+    {
+        "name": "ML101",
+        "date": 1633564800,
+        "description": "An introductory course on machine learning, covering the basics of algorithms, model evaluation, and practical applications.",
+        "domain": [
+            "Machine Learning"
+        ],
+        "chapters": [
+            {
+                "name": "ML1011",
+                "text": "Introduction to MachineLearning"
+            },
+            {
+                "name": "ML1012",
+                "text": "Introduction to MachineLearning"
+            },
+            {
+                "name": "ML1013",
+                "text": "Introduction to MachineLearning"
+            }
+        ]
+    }
+]
